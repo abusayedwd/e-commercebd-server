@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
  
-// console.log(process.env.DB_PSSSWORD)
+// console.log(process.env.DB_PSSSWORD) 
 
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PSSSWORD}@cluster0.b1f0ncj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
@@ -37,12 +37,7 @@ async function run() {
        const cursor = productCollections.find();
        const result = await cursor.toArray();
        res.send(result);
-    })
-    app.get('/products', async(req, res) => { 
-       const cursor = productCollections.find();
-       const result = await cursor.toArray();
-       res.send(result);
-    })
+     }) 
 
     app.get('/products', async(req, res) => {
       const search = req.query.search;
