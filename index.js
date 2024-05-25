@@ -31,9 +31,22 @@ async function run() {
 
     const productCollections = client.db('EcommerceDB').collection('products')
     const reviewsCollections = client.db('EcommerceDB').collection('reviews')
-   
-    app.get('/products', async(req, res) => {
+    
+
+    app.get('/productlist', async(req, res) => { 
        const cursor = productCollections.find();
+       const result = await cursor.toArray();
+       res.send(result);
+    })
+
+    app.get('/products', async(req, res) => {
+      const search = req.query.search;
+      console.log(search)
+      const query = {
+         name: { $regex: `${search}`, $options: 'i'}}
+      const option= { sort: {'price': 1}}
+
+       const cursor = productCollections.find(query,option);
        const result = await cursor.toArray();
        res.send(result);
     })
