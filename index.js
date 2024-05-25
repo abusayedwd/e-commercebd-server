@@ -51,10 +51,11 @@ async function run() {
        res.send(result);
     })
 
-    app.get('/products/:id', async(req,res) => {
+    app.get('/productlist/:id', async(req,res) => {
       const id = req.params.id;
       const query = {_id: new ObjectId(id)}
       const result = await productCollections.findOne(query)
+      console.log(result)
       res.send(result)
 })
 
@@ -62,7 +63,7 @@ app.post('/reviews' , async(req, res) => {
     const reviews = req.body;
    //  console.log(reviews)
     const result = await reviewsCollections.insertOne(reviews);
-    res.send(result)
+    res.send(result) 
 })
 
 app.get('/reviews', async (req,res) => {
